@@ -9,7 +9,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"Paper2D"
 			]
 		}
 	],
@@ -19,15 +20,6 @@
 			"Enabled": true,
 			"TargetAllowList": [
 				"Editor"
-			]
-		},
-		{
-			"Name": "Bridge",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
 			]
 		},
 		{
