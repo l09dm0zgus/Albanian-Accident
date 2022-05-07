@@ -20,6 +20,10 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void SetCurrentHealth(float currentHealth);
 	UFUNCTION(BlueprintCallable, Category = "Health")
+	void IncreaseCurrentHealth(float Value);
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void DecreaseCurrentHealth(float Value);
+	UFUNCTION(BlueprintCallable, Category = "Health")
 	void SetStartHealth(float startHealth);
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetCurrentHealth();

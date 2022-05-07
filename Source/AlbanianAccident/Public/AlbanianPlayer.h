@@ -9,6 +9,7 @@
 #include "PaperSpriteComponent.h"
 #include "AlbanianPlayerMovementComponent.h"
 #include "AlbanianPlayerCameraComponent.h"
+#include "HealthComponent.h"
 #include "EyesLightComponent.h"
 #include "PaperFlipbookComponent.h"
 #include "AlbanianPlayer.generated.h"
@@ -52,6 +53,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	UEyesLightComponent* EyesLightComponent;
 
+	UPROPERTY(EditAnywhere)
+	UHealthComponent* HealthComponent;
+
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void Turn(float AxisValue);
@@ -60,6 +64,7 @@ private:
 	void CreateAndSetupMovementComponent();
 	void CreateAndSetupFlipbookComponent();
 	void CreateAndSetupEyesLightComponent();
+	void CreateAndSetupHealthComponent();
 	void SetupLightFlare();
 	void SetupFirstEyeLight();
 	void SetupSecondEyeLight();

@@ -11,6 +11,7 @@ AAlbanianPlayer::AAlbanianPlayer()
 	CreateAndSetupCameraComponent();
 	CreateAndSetupMovementComponent();
 	CreateAndSetupEyesLightComponent();
+	CreateAndSetupHealthComponent();
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
@@ -96,6 +97,11 @@ void AAlbanianPlayer::CreateAndSetupEyesLightComponent()
 	SetupLightFlare();
 	SetupFirstEyeLight();
 	SetupSecondEyeLight();
+}
+
+void AAlbanianPlayer::CreateAndSetupHealthComponent()
+{
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
 }
 
 void AAlbanianPlayer::SetupLightFlare()

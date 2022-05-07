@@ -7,7 +7,6 @@ void UAlbanianPlayerMovementComponent::TickComponent(float DeltaTime, enum ELeve
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-    // Make sure that everything is still valid, and that we are allowed to move.
     if (!PawnOwner || !UpdatedComponent || ShouldSkipUpdate(DeltaTime))
     {
         return;
@@ -28,7 +27,6 @@ void UAlbanianPlayerMovementComponent::TickComponent(float DeltaTime, enum ELeve
 
 void UAlbanianPlayerMovementComponent::Turn(float AxisValue)
 {
-    FHitResult Hit;
     FRotator Rotator = UpdatedComponent->GetComponentRotation();
     Rotator.Yaw += AxisValue;
     UpdatedComponent->SetRelativeRotation(Rotator);

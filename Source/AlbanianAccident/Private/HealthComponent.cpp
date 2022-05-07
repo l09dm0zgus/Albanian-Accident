@@ -17,6 +17,16 @@ void UHealthComponent::SetCurrentHealth(float currentHealth)
 	this->CurrentHealth = currentHealth;
 }
 
+void UHealthComponent::IncreaseCurrentHealth(float Value)
+{
+	CurrentHealth += Value;
+}
+
+void UHealthComponent::DecreaseCurrentHealth(float Value)
+{
+	CurrentHealth -= Value;
+}
+
 void UHealthComponent::SetStartHealth(float startHealth)
 {
 	this->StartHealth = startHealth;
