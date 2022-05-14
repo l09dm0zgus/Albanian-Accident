@@ -6,9 +6,6 @@
 #include "Camera/CameraComponent.h"
 #include "AlbanianPlayerCameraComponent.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class ALBANIANACCIDENT_API UAlbanianPlayerCameraComponent : public UCameraComponent
 {
@@ -24,13 +21,12 @@ private:
 	float MaximalZoomDistance = 70.0f;
 
 	UPROPERTY(EditAnywhere)
-	float ZoomInAxisValue = 0.5f;
+	float ZoomInAxisValue = -0.5f;
 
 	UPROPERTY(EditAnywhere)
-	float ZoomOutAxisValue = -0.5f;
+	float ZoomOutAxisValue = 0.5f;
 
 	UPROPERTY(EditAnywhere)
 	float MinimalZoomDistance = 20.0f;
 
-	void ChangeNumberSignToZero(float &number);
 };

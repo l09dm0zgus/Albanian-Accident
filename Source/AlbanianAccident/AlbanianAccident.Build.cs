@@ -10,9 +10,9 @@ public class AlbanianAccident : ModuleRules
 
 		PrecompileForTargets = PrecompileTargetsType.Any;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D"  });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D", "UMG"});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "Paper2D"  , "Slate" , "SlateCore"});
 		
 
 		// Uncomment if you are using Slate UI

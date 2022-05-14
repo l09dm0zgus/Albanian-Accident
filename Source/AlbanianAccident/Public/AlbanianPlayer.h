@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "PaperSpriteComponent.h"
 #include "AlbanianPlayerMovementComponent.h"
 #include "AlbanianPlayerCameraComponent.h"
 #include "HealthComponent.h"
 #include "EyesLightComponent.h"
+#include "PlayerHUD.h"
 #include "PaperFlipbookComponent.h"
 #include "AlbanianPlayer.generated.h"
 
@@ -55,6 +56,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UHealthComponent* HealthComponent;
+
 
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);

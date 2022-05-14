@@ -6,9 +6,6 @@
 #include "GameFramework/PawnMovementComponent.h"
 #include "AlbanianPlayerMovementComponent.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class ALBANIANACCIDENT_API UAlbanianPlayerMovementComponent : public UPawnMovementComponent
 {

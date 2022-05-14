@@ -5,25 +5,22 @@
 
 UAlbanianPlayerCameraComponent::UAlbanianPlayerCameraComponent()
 {
-	SetRelativeRotation(FRotator(0.0f, 90.0f, -45.0f));
-	SetRelativeLocation(FVector(0.0f, -45.0f, 0.0f));
+
 }
 
 void UAlbanianPlayerCameraComponent::ZoomIn(float AxisValue)
 {
-	ChangeNumberSignToZero(MinimalZoomDistance);
-	if (GetRelativeLocation().Y <= MinimalZoomDistance)
+	if (GetRelativeLocation().Z >= MinimalZoomDistance)
 	{
-		AddRelativeLocation(FVector(0.0f, AxisValue, 0.0f));
+		AddRelativeLocation(FVector(0.0f, 0.0f, AxisValue));
 	}
 }
 
 void UAlbanianPlayerCameraComponent::ZoomOut(float AxisValue)
 {
-	ChangeNumberSignToZero(MaximalZoomDistance);
-	if (GetRelativeLocation().Y >= MaximalZoomDistance)
+	if (GetRelativeLocation().Z <= MaximalZoomDistance)
 	{
-		AddRelativeLocation(FVector(0.0f, AxisValue, 0.0f));
+		AddRelativeLocation(FVector(0.0f,0.0, AxisValue));
 	}
 }
 
@@ -45,10 +42,4 @@ void UAlbanianPlayerCameraComponent::PinchZoom(float AxisValue)
 
 
 
-void UAlbanianPlayerCameraComponent::ChangeNumberSignToZero(float &number)
-{
-	if (number > 0.0f)
-	{
-		number *= -1.0f;
-	}
-}
+

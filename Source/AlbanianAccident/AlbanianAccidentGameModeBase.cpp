@@ -3,6 +3,7 @@
 
 #include "AlbanianAccidentGameModeBase.h"
 #include "Public/AlbanianPlayer.h"
+#include "Public/PlayerHUD.h"
 
 AAlbanianAccidentGameModeBase::AAlbanianAccidentGameModeBase()
 {
@@ -11,4 +12,5 @@ AAlbanianAccidentGameModeBase::AAlbanianAccidentGameModeBase()
     PrimaryActorTick.bAllowTickOnDedicatedServer = false;
 
     DefaultPawnClass = AAlbanianPlayer::StaticClass();
+    HUDClass = APlayerHUD::StaticClass();
 }

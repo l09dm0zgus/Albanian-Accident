@@ -1,6 +1,5 @@
 
 #include "AlbanianPlayer.h"
-#include "Components/SphereComponent.h"
 
 AAlbanianPlayer::AAlbanianPlayer()
 {
@@ -13,6 +12,7 @@ AAlbanianPlayer::AAlbanianPlayer()
 	CreateAndSetupEyesLightComponent();
 	CreateAndSetupHealthComponent();
 
+
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 	RollActor(90);
@@ -23,6 +23,8 @@ void AAlbanianPlayer::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+
 
 void AAlbanianPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -65,16 +67,19 @@ void AAlbanianPlayer::CreateAndSetupSpringArmComponent()
 {
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraAttachmentArm"));
 	SpringArm->SetupAttachment(RootComponent);
-	SpringArm->SetRelativeRotation(FRotator(-45.f, 0.f, 0.f));
+	SpringArm->SetUsingAbsoluteRotation(true);
 	SpringArm->TargetArmLength = 400.0f;
 	SpringArm->bEnableCameraLag = true;
 	SpringArm->CameraLagSpeed = 3.0f;
+	
 }
 
 void AAlbanianPlayer::CreateAndSetupCameraComponent()
 {
 	Camera = CreateDefaultSubobject<UAlbanianPlayerCameraComponent>(TEXT("ActualCamera"));
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+	Camera->SetRelativeRotation(FRotator(-90.0f, 0.0f, 0.0f));
+	Camera->SetRelativeLocation(FVector(0.0f, 0.0f, 25.0f));
 }
 
 void AAlbanianPlayer::CreateAndSetupMovementComponent()
@@ -86,8 +91,8 @@ void AAlbanianPlayer::CreateAndSetupMovementComponent()
 void AAlbanianPlayer::CreateAndSetupFlipbookComponent()
 {
 	FlipbookComponent = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Flipbook"));
-	RootComponent = FlipbookComponent;
 	FlipbookComponent->SetLooping(false);
+	RootComponent = FlipbookComponent;
 }
 
 void AAlbanianPlayer::CreateAndSetupEyesLightComponent()

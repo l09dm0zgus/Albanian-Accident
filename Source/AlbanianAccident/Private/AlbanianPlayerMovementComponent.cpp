@@ -2,6 +2,9 @@
 
 
 #include "AlbanianPlayerMovementComponent.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 void UAlbanianPlayerMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -27,8 +30,10 @@ void UAlbanianPlayerMovementComponent::TickComponent(float DeltaTime, enum ELeve
 
 void UAlbanianPlayerMovementComponent::Turn(float AxisValue)
 {
-    FRotator Rotator = UpdatedComponent->GetComponentRotation();
-    Rotator.Yaw += AxisValue;
-    UpdatedComponent->SetRelativeRotation(Rotator);
+    FVector MouseLocation, MouseDirection;
+    FVector ActorLocation = UpdatedComponent->GetComponentLocation();
+    UGameplayStatics::GetPlayerController(GetWorld(), 0)->DeprojectMousePositionToWorld(MouseLocation, MouseDirection);
+    FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(ActorLocation, MouseLocation);
+    UpdatedComponent->SetRelativeRotation(FRotator(0.0f,NewRotation.Yaw,90.0f));
 }
 
