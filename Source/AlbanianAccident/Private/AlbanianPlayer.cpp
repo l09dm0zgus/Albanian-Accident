@@ -11,7 +11,7 @@ AAlbanianPlayer::AAlbanianPlayer()
 	CreateAndSetupMovementComponent();
 	CreateAndSetupEyesLightComponent();
 	CreateAndSetupHealthComponent();
-
+	CreateAndSetupWeaponsComponents();
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
@@ -35,6 +35,7 @@ void AAlbanianPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	PlayerInputComponent->BindAction("FirstWeapon", IE_Pressed, this, &AAlbanianPlayer::ChooseFistWeapon);
 	PlayerInputComponent->BindAction("SecondWeapon", IE_Pressed, this, &AAlbanianPlayer::ChooseSecondWeapon);
 	PlayerInputComponent->BindAction("ThirdWeapon", IE_Pressed, this, &AAlbanianPlayer::ChooseThirdWeapon);
+	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AAlbanianPlayer::Fire);
 	PlayerInputComponent->BindAxis("ZoomIn", Camera, &UAlbanianPlayerCameraComponent::ZoomIn);
 	PlayerInputComponent->BindAxis("ZoomOut", Camera, &UAlbanianPlayerCameraComponent::ZoomOut);
 }
@@ -60,6 +61,22 @@ void AAlbanianPlayer::Turn(float AxisValue)
 	if (MovementComponent && (MovementComponent->UpdatedComponent == RootComponent))
 	{
 		MovementComponent->Turn(AxisValue);
+	}
+}
+
+void AAlbanianPlayer::Fire()
+{
+	switch (CurrentWeapon)
+	{
+		case FIRST_WEAPON:
+			FirstWeaponComponent->Fire();
+		break;
+		case SECOND_WEAPON:
+			SecondWeaponFirstGunComponent->Fire();
+			SecondWeaponSecondGunComponent->Fire();
+		break;
+		default:
+		break;
 	}
 }
 
@@ -109,6 +126,21 @@ void AAlbanianPlayer::CreateAndSetupHealthComponent()
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
 }
 
+void AAlbanianPlayer::CreateAndSetupWeaponsComponents()
+{
+	FirstWeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("First Weapon"));
+	FirstWeaponComponent->SetupAttachment(FlipbookComponent);
+	FirstWeaponComponent->SetRelativeLocation(FVector(10.0f, -5.0f, -12.5f));
+
+	SecondWeaponFirstGunComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("Second Weapon 1"));
+	SecondWeaponFirstGunComponent->SetupAttachment(FlipbookComponent);
+	SecondWeaponFirstGunComponent->SetRelativeLocation(FVector(10.0f, -5.0f, -9.0f));
+
+	SecondWeaponSecondGunComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("Second Weapon 2"));
+	SecondWeaponSecondGunComponent->SetupAttachment(FlipbookComponent);
+	SecondWeaponSecondGunComponent->SetRelativeLocation(FVector(10.0f, -5.0f, 9.0f));
+}
+
 void AAlbanianPlayer::SetupLightFlare()
 {
 	FTransform Transform;
@@ -155,12 +187,14 @@ void AAlbanianPlayer::ChooseFistWeapon()
 {
 	FlipbookComponent->SetFlipbook(FistWeaponAnimation);
 	FlipbookComponent->Play();
+	CurrentWeapon = FIRST_WEAPON;
 }
 
 void AAlbanianPlayer::ChooseSecondWeapon()
 {
 	FlipbookComponent->SetFlipbook(SecondWeaponAnimation);
 	FlipbookComponent->Play();
+	CurrentWeapon = SECOND_WEAPON;
 }
 
 void AAlbanianPlayer::ChooseThirdWeapon()
@@ -169,6 +203,7 @@ void AAlbanianPlayer::ChooseThirdWeapon()
 	FlipbookComponent->SetFlipbook(ThirdWeaponAnimation);
 	FlipbookComponent->PlayFromStart();
 	FlipbookComponent->ReverseFromEnd();
+	CurrentWeapon = MEELE_WEAPON;
 
 }
 

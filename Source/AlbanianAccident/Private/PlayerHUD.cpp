@@ -5,7 +5,7 @@
 #include "Blueprint/UserWidget.h"
 APlayerHUD::APlayerHUD()
 {
-    static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUDObject(TEXT("/Game/HUD/PlayerHUD"));
+   static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUDObject(TEXT("/Game/HUD/PlayerHUD"));
    PlayerWidget = PlayerHUDObject.Class;
 }
 void APlayerHUD::BeginPlay()
